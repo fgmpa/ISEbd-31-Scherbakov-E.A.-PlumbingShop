@@ -8,6 +8,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using PlumbingShopBusinessLogic.BusinessLogics;
+using PlumbingShopBusinessLogic.MailWorker;
+using PlumbingShopContracts.BindingModels;
 using PlumbingShopContracts.BusinessLogicsContracts;
 using PlumbingShopContracts.StoragesContracts;
 using PlumbingShopDatabaseImplement.Implements;
@@ -36,6 +38,9 @@ namespace PlumbingShopRestApi
             services.AddTransient<IOrderLogic, OrderLogic>();
             services.AddTransient<IClientLogic, ClientLogic>();
             services.AddTransient<ISanitaryEngineeringLogic, SanitaryEngineeringLogic>();
+            services.AddTransient<IMessageInfoStorage, MessageInfoStorage>();
+            services.AddTransient<IMessageInfoLogic, MessageInfoLogic>();
+            services.AddSingleton<AbstractMailWorker, MailKitWorker>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -62,6 +67,17 @@ namespace PlumbingShopRestApi
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+            });
+
+            var mailSender = app.ApplicationServices.GetService<AbstractMailWorker>();
+            mailSender.MailConfig(new MailConfigBindingModel
+            {
+                MailLogin = Configuration?["MailLogin"],
+                MailPassword = Configuration?["MailPassword"],
+                SmtpClientHost = Configuration?["SmtpClientHost"],
+                SmtpClientPort = Convert.ToInt32(Configuration?["SmtpClientPort"]),
+                PopHost = Configuration?["PopHost"],
+                PopPort = Convert.ToInt32(Configuration?["PopPort"])
             });
         }
     }

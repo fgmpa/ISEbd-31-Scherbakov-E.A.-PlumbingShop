@@ -40,10 +40,9 @@ namespace PlumbingShopView
             this.компонентыПоИзделиямToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.списокЗаказовToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.запускРаботToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.вывестиПисьмаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dataGridViewOrders = new System.Windows.Forms.DataGridView();
             this.buttonCreate = new System.Windows.Forms.Button();
-            this.buttonTakeInWork = new System.Windows.Forms.Button();
-            this.buttonReady = new System.Windows.Forms.Button();
             this.buttonIssue = new System.Windows.Forms.Button();
             this.buttonRefresh = new System.Windows.Forms.Button();
             this.menuStrip.SuspendLayout();
@@ -55,7 +54,8 @@ namespace PlumbingShopView
             this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItemLists,
             this.отчетыToolStripMenuItem,
-            this.запускРаботToolStripMenuItem});
+            this.запускРаботToolStripMenuItem,
+            this.вывестиПисьмаToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
             this.menuStrip.Size = new System.Drawing.Size(986, 24);
@@ -76,28 +76,28 @@ namespace PlumbingShopView
             // toolStripMenuItemSanitaryEngineering
             // 
             this.toolStripMenuItemSanitaryEngineering.Name = "toolStripMenuItemSanitaryEngineering";
-            this.toolStripMenuItemSanitaryEngineering.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItemSanitaryEngineering.Size = new System.Drawing.Size(149, 22);
             this.toolStripMenuItemSanitaryEngineering.Text = "Сантехника";
             this.toolStripMenuItemSanitaryEngineering.Click += new System.EventHandler(this.toolStripMenuItemSanitaryEngineering_Click);
             // 
             // toolStripMenuItemComponent
             // 
             this.toolStripMenuItemComponent.Name = "toolStripMenuItemComponent";
-            this.toolStripMenuItemComponent.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItemComponent.Size = new System.Drawing.Size(149, 22);
             this.toolStripMenuItemComponent.Text = "Компоненты";
             this.toolStripMenuItemComponent.Click += new System.EventHandler(this.toolStripMenuItemComponent_Click);
             // 
             // клиентыToolStripMenuItem
             // 
             this.клиентыToolStripMenuItem.Name = "клиентыToolStripMenuItem";
-            this.клиентыToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.клиентыToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.клиентыToolStripMenuItem.Text = "Клиенты";
             this.клиентыToolStripMenuItem.Click += new System.EventHandler(this.клиентыToolStripMenuItem_Click);
             // 
             // исполнителиToolStripMenuItem
             // 
             this.исполнителиToolStripMenuItem.Name = "исполнителиToolStripMenuItem";
-            this.исполнителиToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.исполнителиToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.исполнителиToolStripMenuItem.Text = "Исполнители";
             this.исполнителиToolStripMenuItem.Click += new System.EventHandler(this.исполнителиToolStripMenuItem_Click);
             // 
@@ -139,6 +139,13 @@ namespace PlumbingShopView
             this.запускРаботToolStripMenuItem.Text = "Запуск работ";
             this.запускРаботToolStripMenuItem.Click += new System.EventHandler(this.запускРаботToolStripMenuItem_Click);
             // 
+            // вывестиПисьмаToolStripMenuItem
+            // 
+            this.вывестиПисьмаToolStripMenuItem.Name = "вывестиПисьмаToolStripMenuItem";
+            this.вывестиПисьмаToolStripMenuItem.Size = new System.Drawing.Size(62, 20);
+            this.вывестиПисьмаToolStripMenuItem.Text = "Письма";
+            this.вывестиПисьмаToolStripMenuItem.Click += new System.EventHandler(this.вывестиПисьмаToolStripMenuItem_Click);
+            // 
             // dataGridViewOrders
             // 
             this.dataGridViewOrders.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
@@ -160,32 +167,10 @@ namespace PlumbingShopView
             this.buttonCreate.UseVisualStyleBackColor = true;
             this.buttonCreate.Click += new System.EventHandler(this.buttonCreate_Click);
             // 
-            // buttonTakeInWork
-            // 
-            this.buttonTakeInWork.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.buttonTakeInWork.Location = new System.Drawing.Point(809, 117);
-            this.buttonTakeInWork.Name = "buttonTakeInWork";
-            this.buttonTakeInWork.Size = new System.Drawing.Size(165, 35);
-            this.buttonTakeInWork.TabIndex = 3;
-            this.buttonTakeInWork.Text = "Отдать на выполнение";
-            this.buttonTakeInWork.UseVisualStyleBackColor = true;
-            this.buttonTakeInWork.Click += new System.EventHandler(this.buttonTakeInWork_Click);
-            // 
-            // buttonReady
-            // 
-            this.buttonReady.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.buttonReady.Location = new System.Drawing.Point(809, 178);
-            this.buttonReady.Name = "buttonReady";
-            this.buttonReady.Size = new System.Drawing.Size(165, 35);
-            this.buttonReady.TabIndex = 4;
-            this.buttonReady.Text = "Заказ готов";
-            this.buttonReady.UseVisualStyleBackColor = true;
-            this.buttonReady.Click += new System.EventHandler(this.buttonReady_Click);
-            // 
             // buttonIssue
             // 
             this.buttonIssue.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.buttonIssue.Location = new System.Drawing.Point(809, 236);
+            this.buttonIssue.Location = new System.Drawing.Point(809, 129);
             this.buttonIssue.Name = "buttonIssue";
             this.buttonIssue.Size = new System.Drawing.Size(165, 35);
             this.buttonIssue.TabIndex = 5;
@@ -196,7 +181,7 @@ namespace PlumbingShopView
             // buttonRefresh
             // 
             this.buttonRefresh.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.buttonRefresh.Location = new System.Drawing.Point(809, 302);
+            this.buttonRefresh.Location = new System.Drawing.Point(809, 196);
             this.buttonRefresh.Name = "buttonRefresh";
             this.buttonRefresh.Size = new System.Drawing.Size(165, 35);
             this.buttonRefresh.TabIndex = 6;
@@ -211,8 +196,6 @@ namespace PlumbingShopView
             this.ClientSize = new System.Drawing.Size(986, 514);
             this.Controls.Add(this.buttonRefresh);
             this.Controls.Add(this.buttonIssue);
-            this.Controls.Add(this.buttonReady);
-            this.Controls.Add(this.buttonTakeInWork);
             this.Controls.Add(this.buttonCreate);
             this.Controls.Add(this.dataGridViewOrders);
             this.Controls.Add(this.menuStrip);
@@ -236,8 +219,6 @@ namespace PlumbingShopView
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemComponent;
         private System.Windows.Forms.DataGridView dataGridViewOrders;
         private System.Windows.Forms.Button buttonCreate;
-        private System.Windows.Forms.Button buttonTakeInWork;
-        private System.Windows.Forms.Button buttonReady;
         private System.Windows.Forms.Button buttonIssue;
         private System.Windows.Forms.Button buttonRefresh;
         private System.Windows.Forms.ToolStripMenuItem отчетыToolStripMenuItem;
@@ -247,5 +228,6 @@ namespace PlumbingShopView
         private System.Windows.Forms.ToolStripMenuItem клиентыToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem исполнителиToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem запускРаботToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem вывестиПисьмаToolStripMenuItem;
     }
 }

@@ -78,41 +78,7 @@ namespace PlumbingShopView
             form.ShowDialog();
             LoadData();
         }
-
-        private void buttonTakeInWork_Click(object sender, EventArgs e)
-        {
-            if (dataGridViewOrders.SelectedRows.Count == 1)
-            {
-                int id = Convert.ToInt32(dataGridViewOrders.SelectedRows[0].Cells[0].Value);
-                try
-                {
-                    orderLogic.TakeOrderInWork(new ChangeStatusBindingModel { OrderId = id });
-                    LoadData();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-        }
-
-        private void buttonReady_Click(object sender, EventArgs e)
-        {
-            if (dataGridViewOrders.SelectedRows.Count == 1)
-            {
-                int id = Convert.ToInt32(dataGridViewOrders.SelectedRows[0].Cells[0].Value);
-                try
-                {
-                    orderLogic.FinishOrder(new ChangeStatusBindingModel { OrderId = id });
-                    LoadData();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-        }
-
+        
         private void buttonIssue_Click(object sender, EventArgs e)
         {
             if (dataGridViewOrders.SelectedRows.Count == 1)
@@ -168,6 +134,11 @@ namespace PlumbingShopView
         {
             workProcces.DoWork(implementerLogic, orderLogic);
             LoadData();
+        }
+        private void вывестиПисьмаToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Program.Container.Resolve<FormMessagesInfo>();
+            form.ShowDialog();
         }
     }
 }
