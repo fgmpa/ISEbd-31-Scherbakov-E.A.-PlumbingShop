@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\PlumbingShopBusinessLogic\PlumbingShopBusinessLogic.csproj" />
+    <ProjectReference Include="..\PlumbingShopFileImplement\PlumbingShopFileImplement.csproj" />
     <ProjectReference Include="..\PlumbingShopListImplement\PlumbingShopListImplement.csproj" />
   </ItemGroup>
 

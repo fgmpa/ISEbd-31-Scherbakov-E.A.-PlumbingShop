@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.32228.343
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlumbingShopContracts", "PlumbingShopContracts\PlumbingShopContracts.csproj", "{9C512E9A-5B54-44B6-B36D-106464C3B98D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PlumbingShopContracts", "PlumbingShopContracts\PlumbingShopContracts.csproj", "{9C512E9A-5B54-44B6-B36D-106464C3B98D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlumbingShopBusinessLogic", "PlumbingShopBusinessLogic\PlumbingShopBusinessLogic.csproj", "{223C541C-8A32-484E-9D45-3942456A248F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PlumbingShopBusinessLogic", "PlumbingShopBusinessLogic\PlumbingShopBusinessLogic.csproj", "{223C541C-8A32-484E-9D45-3942456A248F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlumbingShopListImplement", "PlumbingShopListImplement\PlumbingShopListImplement.csproj", "{9050FE7E-1A9C-4176-AE6C-02551D865E4F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PlumbingShopListImplement", "PlumbingShopListImplement\PlumbingShopListImplement.csproj", "{9050FE7E-1A9C-4176-AE6C-02551D865E4F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlumbingShopView", "PlumbingShopView\PlumbingShopView.csproj", "{98B2CD5E-4BEA-40A8-B419-9FE068D89826}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PlumbingShopView", "PlumbingShopView\PlumbingShopView.csproj", "{98B2CD5E-4BEA-40A8-B419-9FE068D89826}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlumbingShopFileImplement", "PlumbingShopFileImplement\PlumbingShopFileImplement.csproj", "{0887A452-EA82-42BC-B640-3205515CD8DF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{98B2CD5E-4BEA-40A8-B419-9FE068D89826}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{98B2CD5E-4BEA-40A8-B419-9FE068D89826}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{98B2CD5E-4BEA-40A8-B419-9FE068D89826}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0887A452-EA82-42BC-B640-3205515CD8DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0887A452-EA82-42BC-B640-3205515CD8DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0887A452-EA82-42BC-B640-3205515CD8DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0887A452-EA82-42BC-B640-3205515CD8DF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,7 +1,8 @@
 using PlumbingShopBusinessLogic.BusinessLogics;
 using PlumbingShopContracts.BusinessLogicsContracts;
 using PlumbingShopContracts.StoragesContracts;
-using PlumbingShopListImplement.Implements;
+using PlumbingShopFileImplement;
+using PlumbingShopFileImplement.Implements;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,6 +28,7 @@ namespace PlumbingShopView
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(Container.Resolve<FormMain>());
+            FileDataListSingleton.SaveData();
         }
 
         private static IUnityContainer BuildUnityContainer()
