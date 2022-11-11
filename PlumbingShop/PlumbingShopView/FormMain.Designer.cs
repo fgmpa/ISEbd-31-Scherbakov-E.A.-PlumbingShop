@@ -45,6 +45,7 @@ namespace PlumbingShopView
             this.buttonCreate = new System.Windows.Forms.Button();
             this.buttonIssue = new System.Windows.Forms.Button();
             this.buttonRefresh = new System.Windows.Forms.Button();
+            this.БэкапToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewOrders)).BeginInit();
             this.SuspendLayout();
@@ -55,7 +56,8 @@ namespace PlumbingShopView
             this.toolStripMenuItemLists,
             this.отчетыToolStripMenuItem,
             this.запускРаботToolStripMenuItem,
-            this.вывестиПисьмаToolStripMenuItem});
+            this.вывестиПисьмаToolStripMenuItem,
+            this.БэкапToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
             this.menuStrip.Size = new System.Drawing.Size(986, 24);
@@ -189,6 +191,13 @@ namespace PlumbingShopView
             this.buttonRefresh.UseVisualStyleBackColor = true;
             this.buttonRefresh.Click += new System.EventHandler(this.buttonRefresh_Click);
             // 
+            // БэкапToolStripMenuItem
+            // 
+            this.БэкапToolStripMenuItem.Name = "БэкапToolStripMenuItem";
+            this.БэкапToolStripMenuItem.Size = new System.Drawing.Size(51, 20);
+            this.БэкапToolStripMenuItem.Text = "Бэкап";
+            this.БэкапToolStripMenuItem.Click += new System.EventHandler(this.БэкапToolStripMenuItem_Click);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -229,5 +238,6 @@ namespace PlumbingShopView
         private System.Windows.Forms.ToolStripMenuItem исполнителиToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem запускРаботToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem вывестиПисьмаToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem БэкапToolStripMenuItem;
     }
 }

@@ -10,8 +10,8 @@ using PlumbingShopDatabaseImplement;
 namespace PlumbingShopDatabaseImplement.Migrations
 {
     [DbContext(typeof(PlumbingShopDatabase))]
-    [Migration("20220513214036_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20220610065000_initialcreate")]
+    partial class initialcreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -81,6 +81,33 @@ namespace PlumbingShopDatabaseImplement.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Implementers");
+                });
+
+            modelBuilder.Entity("PlumbingShopDatabaseImplement.Models.MessageInfo", b =>
+                {
+                    b.Property<string>("MessageId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Body")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("ClientId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("DateDelivery")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("SenderName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Subject")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("MessageId");
+
+                    b.HasIndex("ClientId");
+
+                    b.ToTable("Messages");
                 });
 
             modelBuilder.Entity("PlumbingShopDatabaseImplement.Models.Order", b =>
@@ -169,6 +196,15 @@ namespace PlumbingShopDatabaseImplement.Migrations
                     b.ToTable("SanitaryEngineeringComponents");
                 });
 
+            modelBuilder.Entity("PlumbingShopDatabaseImplement.Models.MessageInfo", b =>
+                {
+                    b.HasOne("PlumbingShopDatabaseImplement.Models.Client", "Client")
+                        .WithMany("MessageInfo")
+                        .HasForeignKey("ClientId");
+
+                    b.Navigation("Client");
+                });
+
             modelBuilder.Entity("PlumbingShopDatabaseImplement.Models.Order", b =>
                 {
                     b.HasOne("PlumbingShopDatabaseImplement.Models.Client", "Client")
@@ -215,6 +251,8 @@ namespace PlumbingShopDatabaseImplement.Migrations
 
             modelBuilder.Entity("PlumbingShopDatabaseImplement.Models.Client", b =>
                 {
+                    b.Navigation("MessageInfo");
+
                     b.Navigation("Orders");
                 });
 

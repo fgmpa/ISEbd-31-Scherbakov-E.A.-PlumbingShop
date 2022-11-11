@@ -38,16 +38,16 @@
     });
     function check() {
         var count = $('#count').val();
-        var sanitaryEngineering = $('#sanitaryEngineering').val();
-        if (count && sanitaryEngineering) {
+        var dish = $('#dish').val();
+        if (count && dish) {
             $.ajax({
                 method: "POST",
                 url: "/Home/Calc",
-                data: { count: count, sanitaryEngineering: sanitaryEngineering },
+                data: { count: count, dish: dish },
                 success: function (result) {
                     $("#sum").val(result);
                 }
             });
-        }
+        };
     }
 </script>

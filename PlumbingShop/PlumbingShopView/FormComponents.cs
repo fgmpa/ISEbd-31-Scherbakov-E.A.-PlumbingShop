@@ -33,12 +33,7 @@ namespace PlumbingShopView
             try
             {
                 var list = logic.Read(null);
-                if (list != null)
-                {
-                    dataGridViewComponents.DataSource = list;
-                    dataGridViewComponents.Columns[0].Visible = false;
-                    dataGridViewComponents.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-                }
+                Program.ConfigGrid(list, dataGridViewComponents);
             }
             catch (Exception ex)
             {

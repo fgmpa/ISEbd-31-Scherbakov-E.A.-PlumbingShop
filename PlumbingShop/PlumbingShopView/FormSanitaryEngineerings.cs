@@ -32,14 +32,7 @@ namespace PlumbingShopView
         {
             try
             {
-                var list = logic.Read(null);
-                if (list != null)
-                {
-                    dataGridViewSanitaryEngineerings.DataSource = list;
-                    dataGridViewSanitaryEngineerings.Columns[0].Visible = false;
-                    dataGridViewSanitaryEngineerings.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-                    dataGridViewSanitaryEngineerings.Columns[3].Visible = false;
-                }
+                Program.ConfigGrid(logic.Read(null), dataGridViewSanitaryEngineerings);
             }
             catch (Exception ex)
             {

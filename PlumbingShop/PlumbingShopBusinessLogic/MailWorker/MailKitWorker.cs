@@ -2,6 +2,7 @@
 using MailKit.Security;
 using PlumbingShopContracts.BindingModels;
 using PlumbingShopContracts.BusinessLogicsContracts;
+using PlumbingShopContracts.StoragesContracts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,9 +15,10 @@ namespace PlumbingShopBusinessLogic.MailWorker
 {
     public class MailKitWorker : AbstractMailWorker
     {
-        public MailKitWorker(IMessageInfoLogic messageInfoLogic) :
-        base(messageInfoLogic)
+        private IClientStorage _clientStorage;
+        public MailKitWorker(IMessageInfoLogic messageInfoLogic, IClientStorage clientStorage) : base(messageInfoLogic)
         {
+            _clientStorage = clientStorage;
         }
         protected override async Task SendMailAsync(MailSendInfoBindingModel info)
         {
@@ -58,6 +60,7 @@ namespace PlumbingShopBusinessLogic.MailWorker
                         {
                             list.Add(new MessageInfoBindingModel
                             {
+                                ClientId = _clientStorage.GetElement(new ClientBindingModel { Email = mail.Address })?.Id,
                                 DateDelivery = message.Date.DateTime,
                                 MessageId = message.MessageId,
                                 FromMailAddress = mail.Address,

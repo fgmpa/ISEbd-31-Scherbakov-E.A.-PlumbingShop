@@ -19,14 +19,16 @@ namespace PlumbingShopView
         private readonly IReportLogic reportLogic;
         private readonly IWorkProcess workProcces;
         private readonly IImplementerLogic implementerLogic;
+        private readonly IBackUpLogic backUpLogic;
 
-        public FormMain(IOrderLogic _orderLogic, IReportLogic _reportLogic, IWorkProcess _workProcess, IImplementerLogic _implementerLogic)
+        public FormMain(IOrderLogic _orderLogic, IReportLogic _reportLogic, IWorkProcess _workProcess, IImplementerLogic _implementerLogic, IBackUpLogic _backUpLogic)
         {
             InitializeComponent();
             orderLogic = _orderLogic;
             reportLogic = _reportLogic;
             workProcces = _workProcess;
             implementerLogic = _implementerLogic;
+            backUpLogic = _backUpLogic;
         }
 
         private void FormMain_Load(object sender, EventArgs e)
@@ -38,15 +40,7 @@ namespace PlumbingShopView
         {
             try
             {
-                var list = orderLogic.Read(null);
-                dataGridViewOrders.DataSource = list;
-                dataGridViewOrders.Columns[0].Visible = false;
-                dataGridViewOrders.Columns[1].Visible = false;
-                dataGridViewOrders.Columns[2].Visible = false;
-                dataGridViewOrders.Columns[3].Visible = false;
-                dataGridViewOrders.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-                dataGridViewOrders.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-                dataGridViewOrders.Columns[8].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                Program.ConfigGrid(orderLogic.Read(null), dataGridViewOrders);
             }
             catch (Exception ex)
             {
@@ -139,6 +133,25 @@ namespace PlumbingShopView
         {
             var form = Program.Container.Resolve<FormMessagesInfo>();
             form.ShowDialog();
+        }
+        private void БэкапToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (backUpLogic != null)
+                {
+                    var fbd = new FolderBrowserDialog();
+                    if (fbd.ShowDialog() == DialogResult.OK)
+                    {
+                        backUpLogic.CreateBackUp(new BackUpSaveBindingModel { FolderName = fbd.SelectedPath });
+                        MessageBox.Show("Бекап создан", "Сообщение", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }
