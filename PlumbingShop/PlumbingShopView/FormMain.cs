@@ -16,13 +16,17 @@ namespace PlumbingShopView
     public partial class FormMain : Form
     {
         private readonly IOrderLogic orderLogic;
-        private readonly IReportLogic _reportLogic;
+        private readonly IReportLogic reportLogic;
+        private readonly IWorkProcess workProcces;
+        private readonly IImplementerLogic implementerLogic;
 
-        public FormMain(IOrderLogic _orderLogic, IReportLogic reportLogic)
+        public FormMain(IOrderLogic _orderLogic, IReportLogic _reportLogic, IWorkProcess _workProcess, IImplementerLogic _implementerLogic)
         {
             InitializeComponent();
             orderLogic = _orderLogic;
-            _reportLogic = reportLogic;
+            reportLogic = _reportLogic;
+            workProcces = _workProcess;
+            implementerLogic = _implementerLogic;
         }
 
         private void FormMain_Load(object sender, EventArgs e)
@@ -38,8 +42,11 @@ namespace PlumbingShopView
                 dataGridViewOrders.DataSource = list;
                 dataGridViewOrders.Columns[0].Visible = false;
                 dataGridViewOrders.Columns[1].Visible = false;
-                dataGridViewOrders.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-                dataGridViewOrders.Columns[2].Visible= false;
+                dataGridViewOrders.Columns[2].Visible = false;
+                dataGridViewOrders.Columns[3].Visible = false;
+                dataGridViewOrders.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                dataGridViewOrders.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                dataGridViewOrders.Columns[8].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             }
             catch (Exception ex)
             {
@@ -127,7 +134,7 @@ namespace PlumbingShopView
             using var dialog = new SaveFileDialog { Filter = "docx|*.docx" };
             if (dialog.ShowDialog() == DialogResult.OK)
             {
-                _reportLogic.SaveSanitaryEngineeringsToWordFile(new ReportBindingModel
+                reportLogic.SaveSanitaryEngineeringsToWordFile(new ReportBindingModel
                 {
                     FileName = dialog.FileName
                 });
@@ -150,6 +157,17 @@ namespace PlumbingShopView
         {
             var form = Program.Container.Resolve<FormClients>();
             form.ShowDialog();
+        }
+        private void исполнителиToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Program.Container.Resolve<FormImplementers>();
+            form.ShowDialog();
+        }
+
+        private void запускРаботToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            workProcces.DoWork(implementerLogic, orderLogic);
+            LoadData();
         }
     }
 }

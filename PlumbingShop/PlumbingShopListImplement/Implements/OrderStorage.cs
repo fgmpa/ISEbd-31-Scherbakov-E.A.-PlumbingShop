@@ -37,7 +37,9 @@ namespace PlumbingShopListImplement.Implements
                 if ((!model.DateFrom.HasValue && !model.DateTo.HasValue && order.DateCreate.Date == model.DateCreate.Date) ||
                     (model.DateFrom.HasValue && model.DateTo.HasValue &&
                     order.DateCreate >= model.DateFrom && order.DateCreate <= model.DateTo) ||
-                    (model.ClientId.HasValue && order.ClientId == model.ClientId))
+                    (model.ClientId.HasValue && order.ClientId == model.ClientId) || 
+                    (model.ImplementerId.HasValue && order.ImplementerId == model.ImplementerId) ||
+                    (model.SearchStatus.HasValue && model.SearchStatus.Value == order.Status))
                     result.Add(CreateModel(order));
             }
             return result;
@@ -102,6 +104,7 @@ namespace PlumbingShopListImplement.Implements
             order.DateCreate = model.DateCreate;
             order.DateImplement = model.DateImplement;
             order.ClientId = (int)model.ClientId;
+            order.ImplementerId = model.ImplementerId;
             return order;
         }
 
@@ -125,6 +128,18 @@ namespace PlumbingShopListImplement.Implements
                     break;
                 }
             }
+            string implementerFIO = null;
+            if (order.ImplementerId.HasValue)
+            {
+                foreach (Implementer implementer in source.Implementers)
+                {
+                    if (implementer.Id == order.ImplementerId)
+                    {
+                        implementerFIO = implementer.ImplementerFIO;
+                        break;
+                    }
+                }
+            }
             return new OrderViewModel
             {
                 Id = order.Id,
@@ -136,7 +151,9 @@ namespace PlumbingShopListImplement.Implements
                 Sum = order.Sum,
                 Status = order.Status.ToString(),
                 DateCreate = order.DateCreate,
-                DateImplement = order.DateImplement
+                DateImplement = order.DateImplement,
+                ImplementerId = order.ImplementerId,
+                ImplementerFIO = implementerFIO
             };
         }
     }

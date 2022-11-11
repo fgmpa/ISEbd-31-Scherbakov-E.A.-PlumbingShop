@@ -59,6 +59,7 @@ namespace PlumbingShopBusinessLogic.BusinessLogics
             orderStorage.Update(new OrderBindingModel
             {
                 Id = model.OrderId,
+                ImplementerId = model.ImplementerId,
                 ClientId = element.ClientId,
                 Status = OrderStatus.Выполняется,
                 SanitaryEngineeringId = element.SanitaryEngineeringId,
@@ -80,6 +81,7 @@ namespace PlumbingShopBusinessLogic.BusinessLogics
             orderStorage.Update(new OrderBindingModel
             {
                 Id = model.OrderId,
+                ImplementerId = element.ImplementerId,
                 ClientId = element.ClientId,
                 Status = OrderStatus.Готов,
                 DateImplement = element.DateImplement,
@@ -102,6 +104,7 @@ namespace PlumbingShopBusinessLogic.BusinessLogics
             {
                 Id = model.OrderId,
                 ClientId = element.ClientId,
+                ImplementerId = element.ImplementerId,
                 Status = OrderStatus.Выдан,
                 DateImplement = element.DateImplement,
                 SanitaryEngineeringId = element.SanitaryEngineeringId,
