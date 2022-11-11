@@ -16,11 +16,13 @@ namespace PlumbingShopView
     public partial class FormMain : Form
     {
         private readonly IOrderLogic orderLogic;
+        private readonly IReportLogic _reportLogic;
 
-        public FormMain(IOrderLogic _orderLogic)
+        public FormMain(IOrderLogic _orderLogic, IReportLogic reportLogic)
         {
             InitializeComponent();
             orderLogic = _orderLogic;
+            _reportLogic = reportLogic;
         }
 
         private void FormMain_Load(object sender, EventArgs e)
@@ -118,6 +120,29 @@ namespace PlumbingShopView
                     MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
+        }
+        private void списокКомпонентовToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using var dialog = new SaveFileDialog { Filter = "docx|*.docx" };
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                _reportLogic.SaveSanitaryEngineeringsToWordFile(new ReportBindingModel
+                {
+                    FileName = dialog.FileName
+                });
+                MessageBox.Show("Выполнено", "Успех", MessageBoxButtons.OK,
+                MessageBoxIcon.Information);
+            }
+        }
+        private void компонентыПоИзделиямToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Program.Container.Resolve<FormReportSanitaryEngineeringComponents>();
+            form.ShowDialog();
+        }
+        private void списокЗаказовToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Program.Container.Resolve<FormReportOrders>();
+            form.ShowDialog();
         }
     }
 }

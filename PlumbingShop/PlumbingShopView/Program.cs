@@ -1,4 +1,6 @@
 using PlumbingShopBusinessLogic.BusinessLogics;
+using PlumbingShopBusinessLogic.OfficePackage;
+using PlumbingShopBusinessLogic.OfficePackage.Implements;
 using PlumbingShopContracts.BusinessLogicsContracts;
 using PlumbingShopContracts.StoragesContracts;
 using PlumbingShopDatabaseImplement.Implements;
@@ -40,6 +42,10 @@ namespace PlumbingShopView
             currentContainer.RegisterType<IComponentLogic, ComponentLogic>(new HierarchicalLifetimeManager());
             currentContainer.RegisterType<IOrderLogic, OrderLogic>(new HierarchicalLifetimeManager());
             currentContainer.RegisterType<ISanitaryEngineeringLogic, SanitaryEngineeringLogic>(new HierarchicalLifetimeManager());
+            currentContainer.RegisterType<IReportLogic, ReportLogic>(new HierarchicalLifetimeManager());
+            currentContainer.RegisterType<AbstractSaveToExcel, SaveToExcel>(new HierarchicalLifetimeManager());
+            currentContainer.RegisterType<AbstractSaveToWord, SaveToWord>(new HierarchicalLifetimeManager());
+            currentContainer.RegisterType<AbstractSaveToPdf, SaveToPdf>(new HierarchicalLifetimeManager());
 
             return currentContainer;
         }
