@@ -43,6 +43,7 @@ namespace PlumbingShopView
             this.buttonReady = new System.Windows.Forms.Button();
             this.buttonIssue = new System.Windows.Forms.Button();
             this.buttonRefresh = new System.Windows.Forms.Button();
+            this.клиентыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewOrders)).BeginInit();
             this.SuspendLayout();
@@ -62,7 +63,8 @@ namespace PlumbingShopView
             // 
             this.toolStripMenuItemLists.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItemSanitaryEngineering,
-            this.toolStripMenuItemComponent});
+            this.toolStripMenuItemComponent,
+            this.клиентыToolStripMenuItem});
             this.toolStripMenuItemLists.Name = "toolStripMenuItemLists";
             this.toolStripMenuItemLists.Size = new System.Drawing.Size(94, 20);
             this.toolStripMenuItemLists.Text = "Справочники";
@@ -70,14 +72,14 @@ namespace PlumbingShopView
             // toolStripMenuItemSanitaryEngineering
             // 
             this.toolStripMenuItemSanitaryEngineering.Name = "toolStripMenuItemSanitaryEngineering";
-            this.toolStripMenuItemSanitaryEngineering.Size = new System.Drawing.Size(145, 22);
+            this.toolStripMenuItemSanitaryEngineering.Size = new System.Drawing.Size(180, 22);
             this.toolStripMenuItemSanitaryEngineering.Text = "Сантехника";
             this.toolStripMenuItemSanitaryEngineering.Click += new System.EventHandler(this.toolStripMenuItemSanitaryEngineering_Click);
             // 
             // toolStripMenuItemComponent
             // 
             this.toolStripMenuItemComponent.Name = "toolStripMenuItemComponent";
-            this.toolStripMenuItemComponent.Size = new System.Drawing.Size(145, 22);
+            this.toolStripMenuItemComponent.Size = new System.Drawing.Size(180, 22);
             this.toolStripMenuItemComponent.Text = "Компоненты";
             this.toolStripMenuItemComponent.Click += new System.EventHandler(this.toolStripMenuItemComponent_Click);
             // 
@@ -177,6 +179,13 @@ namespace PlumbingShopView
             this.buttonRefresh.UseVisualStyleBackColor = true;
             this.buttonRefresh.Click += new System.EventHandler(this.buttonRefresh_Click);
             // 
+            // клиентыToolStripMenuItem
+            // 
+            this.клиентыToolStripMenuItem.Name = "клиентыToolStripMenuItem";
+            this.клиентыToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.клиентыToolStripMenuItem.Text = "Клиенты";
+            this.клиентыToolStripMenuItem.Click += new System.EventHandler(this.клиентыToolStripMenuItem_Click);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -217,5 +226,6 @@ namespace PlumbingShopView
         private System.Windows.Forms.ToolStripMenuItem списокКомпонентовToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem компонентыПоИзделиямToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem списокЗаказовToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem клиентыToolStripMenuItem;
     }
 }

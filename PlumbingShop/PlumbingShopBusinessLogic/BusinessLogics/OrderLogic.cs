@@ -36,7 +36,14 @@ namespace PlumbingShopBusinessLogic.BusinessLogics
         public void CreateOrder(CreateOrderBindingModel model)
         {
             OrderBindingModel order = new OrderBindingModel
-            { SanitaryEngineeringId = model.SanitaryEngineeringId, Count = model.Count, Sum = model.Sum, Status = 0, DateCreate = DateTime.Now };
+            { 
+                SanitaryEngineeringId = model.SanitaryEngineeringId,
+                ClientId = model.ClientId,
+                Count = model.Count, 
+                Sum = model.Sum, 
+                Status = 0, 
+                DateCreate = DateTime.Now 
+            };
 
             orderStorage.Insert(order);
         }
@@ -52,6 +59,7 @@ namespace PlumbingShopBusinessLogic.BusinessLogics
             orderStorage.Update(new OrderBindingModel
             {
                 Id = model.OrderId,
+                ClientId = element.ClientId,
                 Status = OrderStatus.Выполняется,
                 SanitaryEngineeringId = element.SanitaryEngineeringId,
                 Count = element.Count,
@@ -72,6 +80,7 @@ namespace PlumbingShopBusinessLogic.BusinessLogics
             orderStorage.Update(new OrderBindingModel
             {
                 Id = model.OrderId,
+                ClientId = element.ClientId,
                 Status = OrderStatus.Готов,
                 DateImplement = element.DateImplement,
                 SanitaryEngineeringId = element.SanitaryEngineeringId,
@@ -92,6 +101,7 @@ namespace PlumbingShopBusinessLogic.BusinessLogics
             orderStorage.Update(new OrderBindingModel
             {
                 Id = model.OrderId,
+                ClientId = element.ClientId,
                 Status = OrderStatus.Выдан,
                 DateImplement = element.DateImplement,
                 SanitaryEngineeringId = element.SanitaryEngineeringId,

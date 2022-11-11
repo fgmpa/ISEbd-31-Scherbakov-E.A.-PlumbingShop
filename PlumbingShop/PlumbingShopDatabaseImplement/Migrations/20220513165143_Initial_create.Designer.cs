@@ -10,8 +10,8 @@ using PlumbingShopDatabaseImplement;
 namespace PlumbingShopDatabaseImplement.Migrations
 {
     [DbContext(typeof(PlumbingShopDatabase))]
-    [Migration("20220413223422_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20220513165143_Initial_create")]
+    partial class Initial_create
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,6 +20,30 @@ namespace PlumbingShopDatabaseImplement.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.16")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("PlumbingShopDatabaseImplement.Models.Client", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ClientFIO")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Clients");
+                });
 
             modelBuilder.Entity("PlumbingShopDatabaseImplement.Models.Component", b =>
                 {
@@ -44,6 +68,9 @@ namespace PlumbingShopDatabaseImplement.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("ClientId")
+                        .HasColumnType("int");
+
                     b.Property<int>("Count")
                         .HasColumnType("int");
 
@@ -63,6 +90,8 @@ namespace PlumbingShopDatabaseImplement.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ClientId");
 
                     b.HasIndex("SanitaryEngineeringId");
 
@@ -115,11 +144,19 @@ namespace PlumbingShopDatabaseImplement.Migrations
 
             modelBuilder.Entity("PlumbingShopDatabaseImplement.Models.Order", b =>
                 {
+                    b.HasOne("PlumbingShopDatabaseImplement.Models.Client", "Client")
+                        .WithMany("Orders")
+                        .HasForeignKey("ClientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("PlumbingShopDatabaseImplement.Models.SanitaryEngineering", "SanitaryEngineering")
                         .WithMany("Orders")
                         .HasForeignKey("SanitaryEngineeringId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Client");
 
                     b.Navigation("SanitaryEngineering");
                 });
@@ -141,6 +178,11 @@ namespace PlumbingShopDatabaseImplement.Migrations
                     b.Navigation("Component");
 
                     b.Navigation("SanitaryEngineering");
+                });
+
+            modelBuilder.Entity("PlumbingShopDatabaseImplement.Models.Client", b =>
+                {
+                    b.Navigation("Orders");
                 });
 
             modelBuilder.Entity("PlumbingShopDatabaseImplement.Models.Component", b =>

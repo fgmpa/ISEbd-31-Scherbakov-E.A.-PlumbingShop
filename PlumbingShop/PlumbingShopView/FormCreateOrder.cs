@@ -17,12 +17,14 @@ namespace PlumbingShopView
     {
         private readonly ISanitaryEngineeringLogic logicP;
         private readonly IOrderLogic logicO;
+        private readonly IClientLogic logicC;
 
-        public FormCreateOrder(ISanitaryEngineeringLogic _logicP, IOrderLogic _logicO)
+        public FormCreateOrder(ISanitaryEngineeringLogic _logicP, IOrderLogic _logicO, IClientLogic _logicC)
         {
             InitializeComponent();
             logicP = _logicP;
             logicO = _logicO;
+            logicC = _logicC;
         }
 
         private void FormCreateOrder_Load(object sender, EventArgs e)
@@ -34,6 +36,14 @@ namespace PlumbingShopView
                 comboBoxSanitaryEngineering.ValueMember = "Id";
                 comboBoxSanitaryEngineering.DataSource = list;
                 comboBoxSanitaryEngineering.SelectedItem = null;
+            }
+            List<ClientViewModel> listC = logicC.Read(null);
+            if (listC != null)
+            {
+                comboBoxClient.DisplayMember = "ClientFIO";
+                comboBoxClient.ValueMember = "Id";
+                comboBoxClient.DataSource = listC;
+                comboBoxClient.SelectedItem = null;
             }
         }
 
@@ -77,13 +87,19 @@ namespace PlumbingShopView
                 MessageBox.Show("Выберите изделие", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+            if (comboBoxClient.SelectedValue == null)
+            {
+                MessageBox.Show("Выберите клиента", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             try
             {
                 logicO.CreateOrder(new CreateOrderBindingModel
                 {
                     SanitaryEngineeringId = Convert.ToInt32(comboBoxSanitaryEngineering.SelectedValue),
                     Count = Convert.ToInt32(textBoxCount.Text),
-                    Sum = Convert.ToDecimal(textBoxSum.Text)
+                    Sum = Convert.ToDecimal(textBoxSum.Text),
+                    ClientId = Convert.ToInt32(comboBoxClient.SelectedValue)
                 });
                 MessageBox.Show("Сохранение прошло успешно", "Сообщение", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 DialogResult = DialogResult.OK;

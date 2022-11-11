@@ -11,6 +11,10 @@ namespace PlumbingShopContracts.ViewModels
     {
         public int Id { get; set; }
         public int SanitaryEngineeringId { get; set; }
+        public int ClientId { get; set; }
+        
+        [DisplayName("ФИО клиента")]
+        public string ClientFIO { get; set; }
 
         [DisplayName("Изделие")]
         public string SanitaryEngineeringName { get; set; }

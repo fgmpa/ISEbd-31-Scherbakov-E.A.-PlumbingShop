@@ -38,7 +38,8 @@ namespace PlumbingShopView
                 dataGridViewOrders.DataSource = list;
                 dataGridViewOrders.Columns[0].Visible = false;
                 dataGridViewOrders.Columns[1].Visible = false;
-                dataGridViewOrders.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                dataGridViewOrders.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                dataGridViewOrders.Columns[2].Visible= false;
             }
             catch (Exception ex)
             {
@@ -142,6 +143,12 @@ namespace PlumbingShopView
         private void списокЗаказовToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var form = Program.Container.Resolve<FormReportOrders>();
+            form.ShowDialog();
+        }
+
+        private void клиентыToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Program.Container.Resolve<FormClients>();
             form.ShowDialog();
         }
     }

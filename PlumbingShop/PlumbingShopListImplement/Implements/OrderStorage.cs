@@ -34,7 +34,11 @@ namespace PlumbingShopListImplement.Implements
             var result = new List<OrderViewModel>();
             foreach (var order in source.Orders)
             {
-                if (order.SanitaryEngineeringId == model.SanitaryEngineeringId) result.Add(CreateModel(order));
+                if ((!model.DateFrom.HasValue && !model.DateTo.HasValue && order.DateCreate.Date == model.DateCreate.Date) ||
+                    (model.DateFrom.HasValue && model.DateTo.HasValue &&
+                    order.DateCreate >= model.DateFrom && order.DateCreate <= model.DateTo) ||
+                    (model.ClientId.HasValue && order.ClientId == model.ClientId))
+                    result.Add(CreateModel(order));
             }
             return result;
         }
@@ -97,6 +101,7 @@ namespace PlumbingShopListImplement.Implements
             order.Status = model.Status;
             order.DateCreate = model.DateCreate;
             order.DateImplement = model.DateImplement;
+            order.ClientId = (int)model.ClientId;
             return order;
         }
 
@@ -111,11 +116,22 @@ namespace PlumbingShopListImplement.Implements
                     break;
                 }
             }
+            string clientFIO = null;
+            foreach (Client client in source.Clients)
+            {
+                if (client.Id == order.ClientId)
+                {
+                    clientFIO = client.ClientFIO;
+                    break;
+                }
+            }
             return new OrderViewModel
             {
                 Id = order.Id,
                 SanitaryEngineeringId = order.SanitaryEngineeringId,
+                ClientId = order.ClientId,
                 SanitaryEngineeringName = sanitaryEngineeringName,
+                ClientFIO = clientFIO,
                 Count = order.Count,
                 Sum = order.Sum,
                 Status = order.Status.ToString(),

@@ -38,6 +38,7 @@ namespace PlumbingShopDatabaseImplement.Implements
             using var context = new PlumbingShopDatabase();
             var order = context.Orders
             .Include(rec => rec.SanitaryEngineering)
+            .Include(rec => rec.Client)
             .FirstOrDefault(rec => rec.Id == model.Id ||
             rec.Id == model.Id);
             return order != null ? CreateModel(order) : null;
@@ -52,7 +53,10 @@ namespace PlumbingShopDatabaseImplement.Implements
             using var context = new PlumbingShopDatabase();
             return context.Orders
             .Include(rec => rec.SanitaryEngineering)
-            .Where(rec => rec.Id.Equals(model.Id) || rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo)
+            .Include(rec => rec.Client)
+            .Where(rec => (!model.DateFrom.HasValue && !model.DateTo.HasValue && rec.DateCreate.Date == model.DateCreate.Date) ||
+            (model.DateFrom.HasValue && model.DateTo.HasValue && rec.DateCreate.Date >= model.DateFrom.Value.Date && rec.DateCreate.Date <= model.DateTo.Value.Date) ||
+            (model.ClientId.HasValue && rec.ClientId == model.ClientId))
             .ToList()
             .Select(CreateModel)
             .ToList();
@@ -63,6 +67,7 @@ namespace PlumbingShopDatabaseImplement.Implements
             using var context = new PlumbingShopDatabase();
             return context.Orders
             .Include(rec => rec.SanitaryEngineering)
+            .Include(rec => rec.Client)
             .ToList()
             .Select(CreateModel)
             .ToList();
@@ -110,6 +115,7 @@ namespace PlumbingShopDatabaseImplement.Implements
         private static Order CreateModel(OrderBindingModel model, Order order)
         {
             order.SanitaryEngineeringId = model.SanitaryEngineeringId;
+            order.ClientId = (int)model.ClientId;
             order.Count = model.Count;
             order.Sum = model.Sum;
             order.Status = model.Status;
@@ -124,6 +130,8 @@ namespace PlumbingShopDatabaseImplement.Implements
                 Id = order.Id,
                 SanitaryEngineeringId = order.SanitaryEngineeringId,
                 SanitaryEngineeringName = order.SanitaryEngineering.SanitaryEngineeringName,
+                ClientFIO = order.Client.ClientFIO,
+                ClientId = order.ClientId,
                 Count = order.Count,
                 Sum = order.Sum,
                 Status = Enum.GetName(order.Status),

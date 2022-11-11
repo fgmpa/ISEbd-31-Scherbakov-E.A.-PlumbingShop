@@ -37,6 +37,8 @@ namespace PlumbingShopView
             this.textBoxSum = new System.Windows.Forms.TextBox();
             this.buttonSave = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
+            this.comboBoxClient = new System.Windows.Forms.ComboBox();
+            this.labelClient = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // labelProduct
@@ -98,7 +100,7 @@ namespace PlumbingShopView
             // buttonSave
             // 
             this.buttonSave.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.buttonSave.Location = new System.Drawing.Point(143, 128);
+            this.buttonSave.Location = new System.Drawing.Point(143, 172);
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(93, 31);
             this.buttonSave.TabIndex = 6;
@@ -109,7 +111,7 @@ namespace PlumbingShopView
             // buttonCancel
             // 
             this.buttonCancel.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.buttonCancel.Location = new System.Drawing.Point(242, 128);
+            this.buttonCancel.Location = new System.Drawing.Point(242, 172);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(93, 31);
             this.buttonCancel.TabIndex = 7;
@@ -117,11 +119,32 @@ namespace PlumbingShopView
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
+            // comboBoxClient
+            // 
+            this.comboBoxClient.BackColor = System.Drawing.SystemColors.HighlightText;
+            this.comboBoxClient.FormattingEnabled = true;
+            this.comboBoxClient.Location = new System.Drawing.Point(143, 129);
+            this.comboBoxClient.Name = "comboBoxClient";
+            this.comboBoxClient.Size = new System.Drawing.Size(192, 23);
+            this.comboBoxClient.TabIndex = 9;
+            // 
+            // labelClient
+            // 
+            this.labelClient.AutoSize = true;
+            this.labelClient.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelClient.Location = new System.Drawing.Point(12, 131);
+            this.labelClient.Name = "labelClient";
+            this.labelClient.Size = new System.Drawing.Size(63, 21);
+            this.labelClient.TabIndex = 8;
+            this.labelClient.Text = "Клиент:";
+            // 
             // FormCreateOrder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(362, 174);
+            this.ClientSize = new System.Drawing.Size(362, 212);
+            this.Controls.Add(this.comboBoxClient);
+            this.Controls.Add(this.labelClient);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.textBoxSum);
@@ -148,5 +171,7 @@ namespace PlumbingShopView
         private System.Windows.Forms.TextBox textBoxSum;
         private System.Windows.Forms.Button buttonSave;
         private System.Windows.Forms.Button buttonCancel;
+        private System.Windows.Forms.ComboBox comboBoxClient;
+        private System.Windows.Forms.Label labelClient;
     }
 }

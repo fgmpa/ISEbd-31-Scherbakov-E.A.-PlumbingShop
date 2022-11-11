@@ -26,14 +26,23 @@ namespace PlumbingShopFileImplement.Implements
 
         public List<OrderViewModel> GetFilteredList(OrderBindingModel model)
         {
-            if (model == null) return null;
-            return source.Orders.Where(rec => rec.Id.Equals(model.Id)).Select(CreateModel).ToList();
+            if (model == null)
+            {
+                return null;
+            }
+            return source.Orders
+                 .Where(rec => (!model.DateFrom.HasValue && !model.DateTo.HasValue
+                 && rec.DateCreate.Date == model.DateCreate.Date) ||
+                 (model.DateFrom.HasValue && model.DateTo.HasValue && rec.DateCreate.Date >= model.DateFrom.Value.Date && rec.DateCreate.Date <= model.DateTo.Value.Date) ||
+                 (model.ClientId.HasValue && rec.ClientId == model.ClientId))
+                 .Select(CreateModel)
+                 .ToList();
         }
 
         public OrderViewModel GetElement(OrderBindingModel model)
         {
             if (model == null) return null;
-            var order = source.Orders.FirstOrDefault(rec => rec.Id == model.Id);
+            var order = source.Orders.FirstOrDefault(rec => rec.SanitaryEngineeringId == model.SanitaryEngineeringId || rec.Id == model.Id);
             return order != null ? CreateModel(order) : null;
         }
 
@@ -61,6 +70,7 @@ namespace PlumbingShopFileImplement.Implements
         private static Order CreateModel(OrderBindingModel model, Order order)
         {
             order.SanitaryEngineeringId = model.SanitaryEngineeringId;
+            order.ClientId = (int)model.ClientId;
             order.Count = model.Count;
             order.Sum = model.Sum;
             order.Status = model.Status;
@@ -71,13 +81,19 @@ namespace PlumbingShopFileImplement.Implements
 
         private OrderViewModel CreateModel(Order order)
         {
-            string sanitaryEngineeringName = source.SanitaryEngineerings.FirstOrDefault(rec => rec.Id == order.SanitaryEngineeringId).SanitaryEngineeringName;
+            SanitaryEngineering sanitaryEngineering = source.SanitaryEngineerings.FirstOrDefault(x => x.Id == order.SanitaryEngineeringId);
+            if (sanitaryEngineering == null)
+            {
+                throw new Exception("продукт не найден");
+            }
 
             return new OrderViewModel
             {
-                Id = order.Id,
+                Id = (int)order.Id,
                 SanitaryEngineeringId = order.SanitaryEngineeringId,
-                SanitaryEngineeringName = sanitaryEngineeringName,
+                SanitaryEngineeringName = sanitaryEngineering.SanitaryEngineeringName,
+                ClientId = order.ClientId,
+                ClientFIO = source.Clients.FirstOrDefault(rec => rec.Id == order.ClientId)?.ClientFIO,
                 Count = order.Count,
                 Sum = order.Sum,
                 Status = order.Status.ToString(),
