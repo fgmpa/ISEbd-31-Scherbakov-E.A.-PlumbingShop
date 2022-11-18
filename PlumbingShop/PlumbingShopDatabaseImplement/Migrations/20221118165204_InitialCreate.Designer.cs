@@ -10,7 +10,7 @@ using PlumbingShopDatabaseImplement;
 namespace PlumbingShopDatabaseImplement.Migrations
 {
     [DbContext(typeof(PlumbingShopDatabase))]
-    [Migration("20220413223422_InitialCreate")]
+    [Migration("20221118165204_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
